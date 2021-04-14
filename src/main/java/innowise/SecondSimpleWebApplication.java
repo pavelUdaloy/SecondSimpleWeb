@@ -1,4 +1,4 @@
-package innowise.configuration.business;
+package innowise;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
