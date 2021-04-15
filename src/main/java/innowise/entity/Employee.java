@@ -35,13 +35,15 @@ public class Employee {
     private Long id;
     @Column(name = "first_name")
     private String firstName;
-//    @Column(name = "last_name")
-//    private String lastName;
-//    private String patronymic;
-//    @Column(name = "id_number")
-//    private LocalDate idNumber;
-//    @Enumerated(EnumType.STRING)
-//    private Status status;
+    @Column(name = "last_name")
+    private String lastName;
+    private String patronymic;
+    @Column(name = "id_number")
+    private String idNumber;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 //    private List<CardAccount> cardAccounts;
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

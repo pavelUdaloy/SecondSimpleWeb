@@ -1,9 +1,35 @@
-changeSet:
-  id:  3
-  author:  udaloi
-  changes:
-    -  dropTable:
-         cascadeConstraints:  true
-#         catalogName:  docker
-#         schemaName:  public
-         tableName:  employees
+databaseChangeLog:
+  - preConditions:
+      - onFail: MARK_RAN
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 3
+      author: udaloi
+      changes:
+        - addColumn:
+            tableName: employees
+            columns:
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: varchar(255)
+              - column:
+                  name: id_number
+                  type: varchar(12)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: date
+                  constraints:
+                    nullable: false
