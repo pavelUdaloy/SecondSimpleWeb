@@ -1,9 +1,11 @@
 package innowise.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,8 +27,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 @Table(name = "card_accounts")
-@ToString
 public class CardAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_account_generator")
@@ -37,9 +39,11 @@ public class CardAccount {
     private String currency;
     @Enumerated(EnumType.STRING)
     private Status status;
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//    private List<Card> cards;
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "cardAccount")
+    private List<Card> cards;
+    @JoinColumn(name = "owner_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private Employee employee;
 }

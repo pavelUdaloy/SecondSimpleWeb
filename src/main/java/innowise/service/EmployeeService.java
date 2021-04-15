@@ -6,7 +6,7 @@ import innowise.entity.dto.EmployeeDto;
 import java.util.List;
 
 public interface EmployeeService {
-    Employee get(Long id);
-    Employee add(EmployeeDto employeeDto);
-    List<Employee> getAll();
+    EmployeeDto get(Long id);
+    EmployeeDto add(EmployeeDto employeeDto);
+    List<EmployeeDto> getAll();
 }

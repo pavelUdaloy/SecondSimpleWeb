@@ -1,0 +1,55 @@
+databaseChangeLog:
+  #  - preConditions:
+  #      - onFail: MARK_RAN
+  #        not:
+  #          tableExists:
+  #            tableName: cards
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 7
+      author: udaloi
+      changes:
+        - createTable:
+            tableName: cards
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: logic_status
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_first_name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_last_name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: card_accounts_cards
+            columns:
+              - column:
+                  name: card_account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cards_id
+                  type: bigint
+                  constraints:
+                    nullable: false

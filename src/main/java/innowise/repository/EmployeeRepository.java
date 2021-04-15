@@ -1,17 +1,19 @@
 package innowise.repository;
 
 import innowise.entity.Employee;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
-    @Query("SELECT e from Employee e left join fetch e.cardAccounts WHERE e.id = :empId")
-    Employee get(Long empId);
+    @EntityGraph(attributePaths = "cardAccounts")
+    Optional<Employee> findById(@Param("id") Long id);
 
-    @Query(value = "select e from Employee e left join fetch e.cardAccounts")
-    List<Employee> getAll();
+    @EntityGraph(attributePaths = "cardAccounts")
+    List<Employee> getAllBy();
 }

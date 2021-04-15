@@ -1,0 +1,29 @@
+databaseChangeLog:
+  #  - preConditions:
+  #      - onFail: MARK_RAN
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 8
+      author: udaloi
+      changes:
+        - dropColumn:
+#            catalogName: public
+            columnName: id
+            columns:
+              - column:
+                  name: creation_date
+#            schemaName: public
+            tableName: card_accounts
+  - changeSet:
+      id: 9
+      author: udaloi
+      changes:
+        - addColumn:
+            tableName: cards
+            columns:
+              - column:
+                  name: owner_id
+                  type: bigint
+                  constraints:
+                    nullable: false
