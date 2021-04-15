@@ -1,2 +1,14 @@
 server:
   port : 8081
+spring:
+  datasource:
+    password: docker
+    username: docker
+    url: jdbc:postgresql://localhost:5432/docker
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false

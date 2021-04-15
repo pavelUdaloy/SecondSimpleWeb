@@ -1,0 +1,9 @@
+changeSet:
+  id:  3
+  author:  udaloi
+  changes:
+    -  dropTable:
+         cascadeConstraints:  true
+#         catalogName:  docker
+#         schemaName:  public
+         tableName:  employees

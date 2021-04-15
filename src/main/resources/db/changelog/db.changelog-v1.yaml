@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - preConditions:
+      - onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: employees
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 1
+      author: udaloi
+      changes:
+        - createTable:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false

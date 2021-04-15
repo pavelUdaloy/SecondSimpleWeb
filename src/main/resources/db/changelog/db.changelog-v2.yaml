@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - preConditions:
+      - onFail: MARK_RAN
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 2
+      author: udaloi
+      changes:
+        - addColumn:
+            tableName: employees
+            columns:
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
