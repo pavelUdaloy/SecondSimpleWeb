@@ -3,30 +3,23 @@ databaseChangeLog:
 #      - onFail: MARK_RAN
 #        not:
 #          tableExists:
-#            tableName: roles
+#            tableName: employees_card_accounts
   - runningAs:
       username: udaloi
   - changeSet:
-      id: 4
+      id: 6
       author: udaloi
       changes:
         - createTable:
-            tableName: roles
+            tableName: employees_card_accounts
             columns:
               - column:
-                  name: id
+                  name: employee_id
                   type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: name
-                  type: varchar(20)
                   constraints:
                     nullable: false
               - column:
-                  name: creation_date
-                  type: timestamp
+                  name: card_accounts_id
+                  type: bigint
                   constraints:
                     nullable: false

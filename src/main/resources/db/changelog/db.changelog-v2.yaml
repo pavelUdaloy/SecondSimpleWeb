@@ -1,6 +1,6 @@
 databaseChangeLog:
-  - preConditions:
-      - onFail: MARK_RAN
+#  - preConditions:
+#      - onFail: MARK_RAN
   - runningAs:
       username: udaloi
   - changeSet:

@@ -3,6 +3,7 @@ package innowise.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
+@ToString
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_generator")

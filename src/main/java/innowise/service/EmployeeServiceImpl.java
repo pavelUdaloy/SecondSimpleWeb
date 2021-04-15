@@ -4,11 +4,14 @@ import innowise.entity.Employee;
 import innowise.entity.dto.EmployeeDto;
 import innowise.mapper.EmployeeMapper;
 import innowise.repository.EmployeeRepository;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService{
 
     private EmployeeRepository employeeRepository;
@@ -20,6 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+//    @EntityGraph(value = "graph.Employee.cardAccounts")
     public Employee get(Long id) {
         return employeeRepository.get(id);
     }
@@ -32,6 +36,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employee> getAll() {
-        return (List<Employee>) employeeRepository.findAll();
+        return employeeRepository.getAll();
     }
 }

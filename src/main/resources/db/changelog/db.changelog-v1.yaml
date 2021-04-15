@@ -1,9 +1,9 @@
 databaseChangeLog:
-  - preConditions:
-      - onFail: MARK_RAN
-        not:
-          tableExists:
-            tableName: employees
+#  - preConditions:
+#      - onFail: MARK_RAN
+#        not:
+#          tableExists:
+#            tableName: employees
   - runningAs:
       username: udaloi
   - changeSet:

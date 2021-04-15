@@ -3,15 +3,15 @@ databaseChangeLog:
 #      - onFail: MARK_RAN
 #        not:
 #          tableExists:
-#            tableName: roles
+#            tableName: card_accounts
   - runningAs:
       username: udaloi
   - changeSet:
-      id: 4
+      id: 5
       author: udaloi
       changes:
         - createTable:
-            tableName: roles
+            tableName: card_accounts
             columns:
               - column:
                   name: id
@@ -21,12 +21,27 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: name
+                  name: score_number
                   type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: creation_date
                   type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: owner_id
+                  type: bigint
                   constraints:
                     nullable: false
