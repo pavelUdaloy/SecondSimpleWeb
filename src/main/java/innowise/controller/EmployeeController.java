@@ -1,14 +1,13 @@
 package innowise.controller;
 
 import innowise.entity.Employee;
-import innowise.entity.EmployeeDto;
+import innowise.entity.dto.EmployeeDto;
 import innowise.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,8 +34,6 @@ public class EmployeeController {
 
     @PostMapping
     public Employee post(@RequestBody EmployeeDto employeeDto){
-//        EmployeeDto employeeDto = new EmployeeDto();
-//        employeeDto.setFirstName(firstName);
         return employeeService.add(employeeDto);
     }
 }

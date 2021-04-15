@@ -1,7 +1,7 @@
 package innowise.service;
 
 import innowise.entity.Employee;
-import innowise.entity.EmployeeDto;
+import innowise.entity.dto.EmployeeDto;
 
 import java.util.List;
 

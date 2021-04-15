@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - preConditions:
+      - onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: roles
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 4
+      author: udaloi
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creation_date
+                  type: timestamp
+                  constraints:
+                    nullable: false

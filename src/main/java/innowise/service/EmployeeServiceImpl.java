@@ -1,7 +1,8 @@
 package innowise.service;
 
 import innowise.entity.Employee;
-import innowise.entity.EmployeeDto;
+import innowise.entity.dto.EmployeeDto;
+import innowise.mapper.EmployeeMapper;
 import innowise.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService{
 
     private EmployeeRepository employeeRepository;
+    private EmployeeMapper employeeMapper;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
+        this.employeeMapper = employeeMapper;
     }
 
     @Override
@@ -23,14 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee add(EmployeeDto employeeDto) {
-        Employee employee = new Employee();
-        employee.setFirstName(employeeDto.getFirstName());
-        employee.setLastName(employeeDto.getLastName());
-        employee.setPatronymic(employeeDto.getPatronymic());
-        employee.setIdNumber(employeeDto.getIdNumber());
-        employee.setStatus(employeeDto.getStatus());
-        employee.setBirthDate(employeeDto.getBirthDate());
-
+        Employee employee = employeeMapper.convertDto(employeeDto);
         return employeeRepository.save(employee);
     }
 
