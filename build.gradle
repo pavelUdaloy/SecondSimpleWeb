@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-parent:2.4.4'
+//    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
 
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.3.3'
