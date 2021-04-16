@@ -1,6 +1,5 @@
 package innowise.repository;
 
-import innowise.entity.Card;
 import innowise.entity.CardAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
