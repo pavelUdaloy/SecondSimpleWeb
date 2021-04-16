@@ -15,4 +15,5 @@ import java.util.Map;
 @Setter
 public class LogicCardStatusProperties {
     private Map<String, String> logicStatuses;
+    private String defaultMessage;
 }
