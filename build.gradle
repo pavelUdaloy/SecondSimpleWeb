@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
 
