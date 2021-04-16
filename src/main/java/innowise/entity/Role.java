@@ -33,6 +33,6 @@ public class Role {
     private String name;
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Employee> employees;
+    @ManyToMany(targetEntity = Employee.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+    private List<Employee> employees;
 }

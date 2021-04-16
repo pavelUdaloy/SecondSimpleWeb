@@ -16,4 +16,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @EntityGraph(attributePaths = "cardAccounts")
     List<Employee> getAllBy();
+
+    @EntityGraph(attributePaths = "roles")
+    List<Employee> findAllBy();
 }

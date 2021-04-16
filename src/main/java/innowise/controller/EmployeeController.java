@@ -27,7 +27,7 @@ public class EmployeeController {
 
     @GetMapping
     public List<EmployeeDto> getAll(){
-        return employeeService.getAll();
+        return employeeService.getAllWithRoles();
     }
 
     @PostMapping

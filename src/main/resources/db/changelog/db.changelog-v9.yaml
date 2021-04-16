@@ -1,0 +1,22 @@
+databaseChangeLog:
+  #  - preConditions:
+  #      - onFail: MARK_RAN
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 10
+      author: udaloi
+      changes:
+        - createTable:
+            tableName: employee_role
+            columns:
+              - column:
+                  name: employee_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false

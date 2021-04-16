@@ -42,4 +42,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = employeeRepository.getAllBy();
         return employeeMapper.convertDaos(employees);
     }
+
+    @Override
+    @Transactional
+    public List<EmployeeDto> getAllWithRoles() {
+        List<Employee> employees = employeeRepository.findAllBy();
+        return employeeMapper.convertDaos(employees);
+    }
 }

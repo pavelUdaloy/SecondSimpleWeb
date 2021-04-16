@@ -10,9 +10,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -45,6 +49,9 @@ public class Employee {
             orphanRemoval = true,
             mappedBy = "employee")
     private List<CardAccount> cardAccounts;
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Role> roles;
+    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable( name = "employee_role",
+                joinColumns = @JoinColumn(name = "employee_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 }
