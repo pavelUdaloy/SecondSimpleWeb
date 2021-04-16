@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Configuration
 @ConfigurationProperties(prefix = "logic-status")
-@PropertySource(value = "classpath:logicstatus.yml", factory = LogicCardStatusSourceFactory.class)
+@PropertySource(value = "classpath:application.yml", factory = LogicCardStatusSourceFactory.class)
 @Getter
 @Setter
 public class LogicCardStatusProperties {

@@ -13,3 +13,12 @@ spring:
       ddl-auto: none
     open-in-view: false
     show-sql: true
+logic-status:
+  logic-statuses:
+    100: Запрос на изготовление отправлен
+    200: Изготовлена
+    300: Отправлена в отделение
+    400: Находится в отделении банка
+    430: Выдана клиенту
+  default-message:
+    Статус карты неизвестен
