@@ -20,8 +20,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-parent:2.4.4'
 
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
-    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
+//    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+//    implementation group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.4.4'
+
+    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '7.0.1.Final'
 
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.3.3'
