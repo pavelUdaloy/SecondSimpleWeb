@@ -18,7 +18,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Override
-    @Transactional
     public EmployeeDto get(Long id) {
         Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee != null) {
@@ -37,16 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public List<EmployeeDto> getAll() {
         List<Employee> employees = employeeRepository.getAllBy();
-        return employeeMapper.convertDaos(employees);
-    }
-
-    @Override
-    @Transactional
-    public List<EmployeeDto> getAllWithRoles() {
-        List<Employee> employees = employeeRepository.findAllBy();
         return employeeMapper.convertDaos(employees);
     }
 }

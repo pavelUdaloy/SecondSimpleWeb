@@ -20,17 +20,17 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "/{id}")
-    public EmployeeDto get(@PathVariable Long id){
+    public EmployeeDto get(@PathVariable Long id) {
         return employeeService.get(id);
     }
 
     @GetMapping
-    public List<EmployeeDto> getAll(){
-        return employeeService.getAllWithRoles();
+    public List<EmployeeDto> getAll() {
+        return employeeService.getAll();
     }
 
     @PostMapping
-    public EmployeeDto post(@RequestBody EmployeeDto employeeDto){
+    public EmployeeDto post(@RequestBody EmployeeDto employeeDto) {
         return employeeService.add(employeeDto);
     }
 }

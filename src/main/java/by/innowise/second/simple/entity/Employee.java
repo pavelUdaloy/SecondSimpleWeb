@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -29,6 +31,10 @@ import java.util.List;
 @Entity
 @DynamicUpdate
 @Table(name = "employees")
+@NamedEntityGraph(name = "Employee.cardAccounts",
+        attributeNodes = @NamedAttributeNode("cardAccounts"))
+@NamedEntityGraph(name = "Employee.roles",
+        attributeNodes = @NamedAttributeNode("roles"))
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_generator")
@@ -50,8 +56,8 @@ public class Employee {
             mappedBy = "employee")
     private List<CardAccount> cardAccounts;
     @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable( name = "employee_role",
-                joinColumns = @JoinColumn(name = "employee_id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "employee_role",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 }

@@ -10,6 +10,4 @@ public interface EmployeeService {
     List<EmployeeDto> getAll();
 
     EmployeeDto add(EmployeeDto employeeDto);
-
-    List<EmployeeDto> getAllWithRoles();
 }

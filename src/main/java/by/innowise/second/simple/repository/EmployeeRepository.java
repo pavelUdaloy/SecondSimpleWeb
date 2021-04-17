@@ -1,4 +1,5 @@
 package by.innowise.second.simple.repository;
+
 import by.innowise.second.simple.entity.Employee;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
@@ -10,12 +11,12 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
-    @EntityGraph(attributePaths = "cardAccounts")
+    @EntityGraph(value = "Employee.cardAccounts")
     Optional<Employee> findById(@Param("id") Long id);
-//todo лучше юзать NamedEntityGraph
-    @EntityGraph(attributePaths = "cardAccounts")
+
+    @EntityGraph(value = "Employee.cardAccounts")
     List<Employee> getAllBy();
 
-    @EntityGraph(attributePaths = "roles")
+    @EntityGraph(value = "Employee.roles")
     List<Employee> findAllBy();
 }
