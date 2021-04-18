@@ -8,6 +8,4 @@ public interface EmployeeService {
     EmployeeDto get(Long id);
 
     List<EmployeeDto> getAll();
-
-    EmployeeDto add(EmployeeDto employeeDto);
 }

@@ -51,6 +51,8 @@ public class Employee {
     private Status status;
     @Column(name = "birth_date")
     private LocalDate birthDate;
+    private String username;
+    private String password;
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true,
             mappedBy = "employee")

@@ -1,0 +1,34 @@
+databaseChangeLog:
+  #  - preConditions:
+  #      - onFail: MARK_RAN
+  - runningAs:
+      username: udaloi
+  - changeSet:
+      id: 12
+      author: udaloi
+      changes:
+        - addUniqueConstraint:
+            columnNames: username
+            tableName: employees
+        - addUniqueConstraint:
+            columnNames: number
+            tableName: cards
+        - addUniqueConstraint:
+            columnNames: score_number
+            tableName: card_accounts
+        - addUniqueConstraint:
+            columnNames: creation_date
+            tableName: roles
+  - changeSet:
+      id: 13
+      author: udaloi
+      changes:
+        - addUniqueConstraint:
+            columnNames: id_number
+            tableName: employees
+        - addUniqueConstraint:
+            columnNames: score_number
+            tableName: card_accounts
+        - addUniqueConstraint:
+            columnNames: name
+            tableName: roles

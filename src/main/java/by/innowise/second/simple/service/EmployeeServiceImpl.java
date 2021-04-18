@@ -6,7 +6,6 @@ import by.innowise.second.simple.mapper.EmployeeMapper;
 import by.innowise.second.simple.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeRepository employeeRepository;
-    private EmployeeMapper employeeMapper;
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeMapper employeeMapper;
 
     @Override
     public EmployeeDto get(Long id) {
@@ -25,14 +24,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             return null;
         }
-    }
-
-    @Override
-    @Transactional
-    public EmployeeDto add(EmployeeDto employeeDto) {
-        Employee employee = employeeMapper.convertDto(employeeDto);
-        Employee savedEmployee = employeeRepository.save(employee);
-        return employeeMapper.convertDao(savedEmployee);
     }
 
     @Override

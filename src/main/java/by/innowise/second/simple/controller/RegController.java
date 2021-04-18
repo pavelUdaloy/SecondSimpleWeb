@@ -1,7 +1,7 @@
 package by.innowise.second.simple.controller;
 
-import by.innowise.second.simple.entity.dto.UserDto;
-import by.innowise.second.simple.service.AuthService;
+import by.innowise.second.simple.entity.dto.RegDto;
+import by.innowise.second.simple.service.RegService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/auth")
+@RequestMapping(path = "/reg")
 @AllArgsConstructor
-public class AuthController {
+public class RegController {
 
-    private final AuthService authService;
+    //3- jjjjjjjj
+    //4- 123123123
+    //5- 12345678
+
+    private final RegService regService;
 
     @PostMapping
-//    public TokenDto post(@RequestBody UserDto userDto) {
-    public Boolean post(@RequestBody UserDto userDto) {
-        return authService.auth(userDto);
+    public Boolean post(@RequestBody RegDto regDto) {
+        return regService.add(regDto);
     }
 }
