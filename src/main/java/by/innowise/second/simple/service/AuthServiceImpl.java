@@ -54,13 +54,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDto userDto = getByUsername(username);
-        if (Objects.isNull(userDto)) {
-            throw new UsernameNotFoundException(String.format("Employee %s is not found", username));
-        }
-        HashSet<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new User(userDto.getUsername(), userDto.getPassword(), true,
-                true, true, true, authorities);
+                true, true, true, new HashSet<>());
     }
 
     public UserDto getByUsername(String username) {
