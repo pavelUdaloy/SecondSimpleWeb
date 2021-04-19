@@ -9,8 +9,8 @@ import by.innowise.second.simple.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -36,12 +35,11 @@ public class AuthServiceImpl implements AuthService {
         boolean matches = passwordEncoder.matches(userDto.getPassword(), employee.getPassword());
 
         if (matches) {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    userDto.getUsername(), userDto.getPassword()));//todo тут хз
-
-            UserDetails userdetails = loadUserByUsername(userDto.getUsername());
-            String accessToken = jwtUtil.generateToken(userdetails);
-            String refreshToken = jwtUtil.doGenerateRefreshToken(userdetails.getUsername());
+            Authentication authenticate = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authenticate);
+            String accessToken = jwtUtil.generateAccessToken(userDto.getUsername());
+            String refreshToken = jwtUtil.generateRefreshToken(userDto.getUsername());
             TokenDto tokenDto = new TokenDto();
             tokenDto.setAccess(accessToken);
             tokenDto.setRefresh(refreshToken);
@@ -52,14 +50,16 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto userDto = getByUsername(username);
-        return new User(userDto.getUsername(), userDto.getPassword(), true,
-                true, true, true, new HashSet<>());
+    public String refresh() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return jwtUtil.generateAccessToken(username);
     }
 
-    public UserDto getByUsername(String username) {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Employee employee = employeeRepository.findByUsername(username);
-        return employeeMapper.convertToUserDto(employee);
+        UserDto userDto = employeeMapper.convertToUserDto(employee);
+        return new User(userDto.getUsername(), userDto.getPassword(), true,
+                true, true, true, new HashSet<>());
     }
 }
