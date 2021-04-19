@@ -15,6 +15,11 @@ spring:
     open-in-view: false
     show-sql: true
 
+jwt-consts:
+  secret: pashasimplespring
+  access-expiration-date-in-ms: 180000
+  refresh-expiration-date-in-ms: 7200000
+
 logic-status:
   logic-statuses:
     100: Запрос на изготовление отправлен

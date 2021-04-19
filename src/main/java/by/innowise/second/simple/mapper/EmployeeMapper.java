@@ -3,6 +3,7 @@ package by.innowise.second.simple.mapper;
 import by.innowise.second.simple.entity.Employee;
 import by.innowise.second.simple.entity.dto.EmployeeDto;
 import by.innowise.second.simple.entity.dto.RegDto;
+import by.innowise.second.simple.entity.dto.UserDto;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,13 @@ public class EmployeeMapper {
         employee.setStatus(employeeDto.getStatus());
         employee.setBirthDate(employeeDto.getBirthDate());
         return employee;
+    }
+
+    public UserDto convertToUserDto(Employee employee) {
+        UserDto userDto = new UserDto();
+        userDto.setPassword(employee.getPassword());
+        userDto.setUsername(employee.getUsername());
+        return userDto;
     }
 
     public Employee convertRegDto(RegDto regDto) {

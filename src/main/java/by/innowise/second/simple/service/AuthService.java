@@ -1,8 +1,9 @@
 package by.innowise.second.simple.service;
 
+import by.innowise.second.simple.entity.dto.TokenDto;
 import by.innowise.second.simple.entity.dto.UserDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface AuthService {
-    //    TokenDto auth(UserDto userDto);
-    Boolean auth(UserDto userDto);
+public interface AuthService extends UserDetailsService {
+    TokenDto auth(UserDto userDto);
 }
