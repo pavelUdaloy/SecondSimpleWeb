@@ -1,13 +1,10 @@
 package by.innowise.second.simple.filter;
 
 import by.innowise.second.simple.security.JwtUtil;
+import by.innowise.second.simple.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -15,13 +12,13 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashSet;
 
 @Component
 @AllArgsConstructor
 public class CustomJwtFilter extends HttpFilter {
 
     private final JwtUtil jwtTokenUtil;
+    private final UserService userService;
 
     @SneakyThrows
     @Override
@@ -30,10 +27,7 @@ public class CustomJwtFilter extends HttpFilter {
             super.doFilter(request, response, chain);
         } else {
             String jwtToken = extractJwtFromRequest(request);
-            UserDetails userDetails = new User(jwtTokenUtil.getUsernameFromToken(jwtToken),
-                    "", new HashSet<>());
-            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities()));
+            userService.setUser(jwtTokenUtil.getUsernameFromToken(jwtToken), "");
             if (StringUtils.hasText(jwtToken) && jwtTokenUtil.validateToken(jwtToken)) {
                 super.doFilter(request, response, chain);
             } else {

@@ -23,13 +23,17 @@ public class JwtUtil {
     }
 
     public String generateAccessToken(String username) {
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration.toMillis()))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public String generateRefreshToken(String username) {
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration.toMillis()))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }

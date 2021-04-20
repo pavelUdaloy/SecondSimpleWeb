@@ -7,5 +7,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface AuthService extends UserDetailsService {
     TokenDto auth(UserDto userDto);
 
-    String refresh();
+    TokenDto refresh();
 }

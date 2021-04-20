@@ -1,19 +1,16 @@
 package by.innowise.second.simple.service;
 
-import by.innowise.second.simple.security.JwtUtil;
-import by.innowise.second.simple.entity.Employee;
 import by.innowise.second.simple.controller.dto.TokenDto;
 import by.innowise.second.simple.controller.dto.UserDto;
+import by.innowise.second.simple.entity.Employee;
 import by.innowise.second.simple.mapper.EmployeeMapper;
 import by.innowise.second.simple.repository.EmployeeRepository;
+import by.innowise.second.simple.security.JwtUtil;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,33 +23,33 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
-    private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
 
     @Override
     public TokenDto auth(UserDto userDto) {
         Employee employee = employeeRepository.findByUsername(userDto.getUsername());
-        boolean matches = passwordEncoder.matches(userDto.getPassword(), employee.getPassword());
-
-        if (matches) {
-            Authentication authenticate = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authenticate);
-            String accessToken = jwtUtil.generateAccessToken(userDto.getUsername());
-            String refreshToken = jwtUtil.generateRefreshToken(userDto.getUsername());
-            TokenDto tokenDto = new TokenDto();
-            tokenDto.setAccess(accessToken);
-            tokenDto.setRefresh(refreshToken);
-            return tokenDto;
-        } else {
+        if (!passwordEncoder.matches(userDto.getPassword(), employee.getPassword())) {
             throw new UsernameNotFoundException("Wrong password");
         }
+        userService.setUser(userDto.getUsername(), userDto.getPassword());
+        String accessToken = jwtUtil.generateAccessToken(userDto.getUsername());
+        String refreshToken = jwtUtil.generateRefreshToken(userDto.getUsername());
+        TokenDto tokenDto = new TokenDto();
+        tokenDto.setAccess(accessToken);
+        tokenDto.setRefresh(refreshToken);
+        return tokenDto;
     }
 
     @Override
-    public String refresh() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return jwtUtil.generateAccessToken(username);
+    public TokenDto refresh() {
+        String username = userService.getUser().getName();
+        String accessToken = jwtUtil.generateAccessToken(username);
+        String refreshToken = jwtUtil.generateRefreshToken(username);
+        TokenDto tokenDto = new TokenDto();
+        tokenDto.setAccess(accessToken);
+        tokenDto.setRefresh(refreshToken);
+        return tokenDto;
     }
 
     @Override
