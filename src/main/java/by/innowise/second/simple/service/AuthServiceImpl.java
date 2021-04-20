@@ -7,10 +7,10 @@ import by.innowise.second.simple.mapper.EmployeeMapper;
 import by.innowise.second.simple.repository.EmployeeRepository;
 import by.innowise.second.simple.security.JwtUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,6 @@ public class AuthServiceImpl implements AuthService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
     private final JwtUtil jwtUtil;
-    private final UserService userService;
 
     @Override
     public TokenDto auth(UserDto userDto) {
@@ -32,7 +31,6 @@ public class AuthServiceImpl implements AuthService {
         if (!passwordEncoder.matches(userDto.getPassword(), employee.getPassword())) {
             throw new UsernameNotFoundException("Wrong password");
         }
-        userService.setUser(userDto.getUsername(), userDto.getPassword());
         String accessToken = jwtUtil.generateAccessToken(userDto.getUsername());
         String refreshToken = jwtUtil.generateRefreshToken(userDto.getUsername());
         TokenDto tokenDto = new TokenDto();
@@ -42,8 +40,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public TokenDto refresh() {
-        String username = userService.getUser().getName();
+    public TokenDto refresh(Authentication authentication) {
+        String username = authentication.getName();
         String accessToken = jwtUtil.generateAccessToken(username);
         String refreshToken = jwtUtil.generateRefreshToken(username);
         TokenDto tokenDto = new TokenDto();
