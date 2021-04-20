@@ -14,6 +14,8 @@ import java.time.Duration;
 public class JwtConstsProperties {
     @NotBlank
     private String secret;
+    @NotBlank
+    private String signatureAlgorithm;
     @NotNull
     private Duration accessExpirationDateInMs;
     @NotNull

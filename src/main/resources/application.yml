@@ -17,6 +17,7 @@ spring:
 
 jwt-consts:
   secret: pashasimplespring
+  signature-algorithm: HS512
   access-expiration-date-in-ms: 3m
   refresh-expiration-date-in-ms: 2h
 
