@@ -6,30 +6,31 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
     private final String secret;
-    private final Integer jwtExpirationInMs;
-    private final Integer refreshExpirationDateInMs;
+    private final Duration jwtExpiration;
+    private final Duration refreshExpiration;
 
     public JwtUtil(JwtConstsProperties jwtConstsProperties) {
         secret = jwtConstsProperties.getSecret();
-        jwtExpirationInMs = jwtConstsProperties.getAccessExpirationDateInMs();
-        refreshExpirationDateInMs = jwtConstsProperties.getRefreshExpirationDateInMs();
+        jwtExpiration = jwtConstsProperties.getAccessExpirationDateInMs();
+        refreshExpiration = jwtConstsProperties.getRefreshExpirationDateInMs();
     }
 
     public String generateAccessToken(String username) {
         return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration.toMillis()))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public String generateRefreshToken(String username) {
         return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
+                .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration.toMillis()))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 

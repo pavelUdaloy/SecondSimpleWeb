@@ -17,8 +17,8 @@ spring:
 
 jwt-consts:
   secret: pashasimplespring
-  access-expiration-date-in-ms: 180000
-  refresh-expiration-date-in-ms: 7200000
+  access-expiration-date-in-ms: 3m
+  refresh-expiration-date-in-ms: 2h
 
 logic-status:
   logic-statuses:
