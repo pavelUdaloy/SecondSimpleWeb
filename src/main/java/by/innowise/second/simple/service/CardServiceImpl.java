@@ -1,8 +1,8 @@
 package by.innowise.second.simple.service;
 
+import by.innowise.second.simple.controller.dto.CardDto;
 import by.innowise.second.simple.entity.Card;
 import by.innowise.second.simple.entity.CardAccount;
-import by.innowise.second.simple.controller.dto.CardDto;
 import by.innowise.second.simple.mapper.CardMapper;
 import by.innowise.second.simple.properties.LogicCardStatusProperties;
 import by.innowise.second.simple.repository.CardRepository;
@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
 @Service
@@ -25,8 +26,9 @@ public class CardServiceImpl implements CardService {
         Card card = cardRepository.findById(id).orElse(null);
         if (card != null) {
             return convertLogicStatus(cardMapper.convertDao(card));
+        } else {
+            throw new EmptyStackException();
         }
-        return null;
     }
 
     @Override

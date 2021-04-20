@@ -1,8 +1,8 @@
 package by.innowise.second.simple.mapper;
 
+import by.innowise.second.simple.controller.dto.CardDto;
 import by.innowise.second.simple.entity.Card;
 import by.innowise.second.simple.entity.CardAccount;
-import by.innowise.second.simple.controller.dto.CardDto;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
