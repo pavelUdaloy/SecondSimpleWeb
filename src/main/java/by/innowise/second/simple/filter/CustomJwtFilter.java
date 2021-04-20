@@ -20,6 +20,9 @@ public class CustomJwtFilter extends HttpFilter {
     private final JwtUtil jwtTokenUtil;
     private final UserService userService;
 
+    private final String AUTHORIZATION = "Authorization";
+    private final String BEARER = "Bearer ";
+
     @SneakyThrows
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) {
@@ -37,9 +40,9 @@ public class CustomJwtFilter extends HttpFilter {
     }
 
     private String extractJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
+        String bearerToken = request.getHeader(AUTHORIZATION);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER)) {
+            return bearerToken.substring(BEARER.length());
         } else {
             return null;
         }
