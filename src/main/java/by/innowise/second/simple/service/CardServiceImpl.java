@@ -2,7 +2,7 @@ package by.innowise.second.simple.service;
 
 import by.innowise.second.simple.entity.Card;
 import by.innowise.second.simple.entity.CardAccount;
-import by.innowise.second.simple.entity.dto.CardDto;
+import by.innowise.second.simple.controller.dto.CardDto;
 import by.innowise.second.simple.mapper.CardMapper;
 import by.innowise.second.simple.properties.LogicCardStatusProperties;
 import by.innowise.second.simple.repository.CardRepository;

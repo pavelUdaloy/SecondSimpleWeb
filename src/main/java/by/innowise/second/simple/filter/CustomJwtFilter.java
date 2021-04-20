@@ -1,6 +1,6 @@
 package by.innowise.second.simple.filter;
 
-import by.innowise.second.simple.controller.security.JwtUtil;
+import by.innowise.second.simple.security.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.BadCredentialsException;

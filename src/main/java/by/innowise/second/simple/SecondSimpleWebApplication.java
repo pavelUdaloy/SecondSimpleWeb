@@ -15,9 +15,4 @@ public class SecondSimpleWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(SecondSimpleWebApplication.class, args);
     }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

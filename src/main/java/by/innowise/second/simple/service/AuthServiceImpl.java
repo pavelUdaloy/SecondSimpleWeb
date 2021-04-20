@@ -1,9 +1,9 @@
 package by.innowise.second.simple.service;
 
-import by.innowise.second.simple.controller.security.JwtUtil;
+import by.innowise.second.simple.security.JwtUtil;
 import by.innowise.second.simple.entity.Employee;
-import by.innowise.second.simple.entity.dto.TokenDto;
-import by.innowise.second.simple.entity.dto.UserDto;
+import by.innowise.second.simple.controller.dto.TokenDto;
+import by.innowise.second.simple.controller.dto.UserDto;
 import by.innowise.second.simple.mapper.EmployeeMapper;
 import by.innowise.second.simple.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package by.innowise.second.simple.controller.security;
+package by.innowise.second.simple.security;
 
 import by.innowise.second.simple.properties.JwtConstsProperties;
 import io.jsonwebtoken.Claims;

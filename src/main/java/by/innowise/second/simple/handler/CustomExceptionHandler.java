@@ -1,4 +1,4 @@
-package by.innowise.second.simple.controller;
+package by.innowise.second.simple.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class ExceptionHandlingController {
+public class CustomExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleBaseException(
             Exception ex, WebRequest request) {

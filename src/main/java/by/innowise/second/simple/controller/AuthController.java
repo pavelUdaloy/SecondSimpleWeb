@@ -1,7 +1,7 @@
 package by.innowise.second.simple.controller;
 
-import by.innowise.second.simple.entity.dto.TokenDto;
-import by.innowise.second.simple.entity.dto.UserDto;
+import by.innowise.second.simple.controller.dto.TokenDto;
+import by.innowise.second.simple.controller.dto.UserDto;
 import by.innowise.second.simple.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

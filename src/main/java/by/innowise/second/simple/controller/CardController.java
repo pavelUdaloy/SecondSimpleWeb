@@ -1,6 +1,6 @@
 package by.innowise.second.simple.controller;
 
-import by.innowise.second.simple.entity.dto.CardDto;
+import by.innowise.second.simple.controller.dto.CardDto;
 import by.innowise.second.simple.service.CardService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
