@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/employee")
+@RequestMapping(path = "/employees")
 @AllArgsConstructor
 public class EmployeeController {
 

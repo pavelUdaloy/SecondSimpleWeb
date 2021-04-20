@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/card")
+@RequestMapping(path = "/cards")
 @AllArgsConstructor
 public class CardController {
 
@@ -29,7 +29,7 @@ public class CardController {
         return cardService.getAll();
     }
 
-    @GetMapping("/acc/{id}")
+    @GetMapping("/acc/{id}")      //todo тут поменять нужно будет
     public List<CardDto> getAllByAcc(@PathVariable Long id) {
         return cardService.getAccountCards(id);
     }
