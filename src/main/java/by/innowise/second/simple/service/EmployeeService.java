@@ -1,6 +1,6 @@
 package by.innowise.second.simple.service;
 
-import by.innowise.second.simple.entity.dto.EmployeeDto;
+import by.innowise.second.simple.controller.dto.EmployeeDto;
 
 import java.util.List;
 

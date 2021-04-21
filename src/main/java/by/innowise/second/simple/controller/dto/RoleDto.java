@@ -1,4 +1,4 @@
-package by.innowise.second.simple.entity.dto;
+package by.innowise.second.simple.controller.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

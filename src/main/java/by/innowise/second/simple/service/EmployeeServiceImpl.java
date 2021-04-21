@@ -1,12 +1,13 @@
 package by.innowise.second.simple.service;
 
+import by.innowise.second.simple.controller.dto.EmployeeDto;
 import by.innowise.second.simple.entity.Employee;
-import by.innowise.second.simple.entity.dto.EmployeeDto;
 import by.innowise.second.simple.mapper.EmployeeMapper;
 import by.innowise.second.simple.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employee != null) {
             return employeeMapper.convertDao(employee);
         } else {
-            return null;
+            throw new EmptyStackException();
         }
     }
 

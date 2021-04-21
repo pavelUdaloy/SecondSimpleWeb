@@ -1,9 +1,9 @@
 package by.innowise.second.simple.mapper;
 
+import by.innowise.second.simple.controller.dto.EmployeeDto;
+import by.innowise.second.simple.controller.dto.RegDto;
+import by.innowise.second.simple.controller.dto.UserDto;
 import by.innowise.second.simple.entity.Employee;
-import by.innowise.second.simple.entity.dto.EmployeeDto;
-import by.innowise.second.simple.entity.dto.RegDto;
-import by.innowise.second.simple.entity.dto.UserDto;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 

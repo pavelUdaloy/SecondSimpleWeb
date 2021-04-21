@@ -1,6 +1,6 @@
 package by.innowise.second.simple.service;
 
-import by.innowise.second.simple.entity.dto.CardDto;
+import by.innowise.second.simple.controller.dto.CardDto;
 
 import java.util.List;
 

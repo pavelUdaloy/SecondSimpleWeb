@@ -1,9 +1,10 @@
 package by.innowise.second.simple.controller;
 
-import by.innowise.second.simple.entity.dto.TokenDto;
-import by.innowise.second.simple.entity.dto.UserDto;
+import by.innowise.second.simple.controller.dto.TokenDto;
+import by.innowise.second.simple.controller.dto.UserDto;
 import by.innowise.second.simple.service.AuthService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,8 @@ public class AuthController {
         return authService.auth(userDto);
     }
 
-    @GetMapping(path = "/refresh")
-    public String refresh() {
-        return authService.refresh();
+    @GetMapping("/refresh")
+    public TokenDto refresh(Authentication authentication) {
+        return authService.refresh(authentication);
     }
 }

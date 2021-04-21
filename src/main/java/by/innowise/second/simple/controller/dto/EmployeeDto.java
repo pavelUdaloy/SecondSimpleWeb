@@ -1,4 +1,4 @@
-package by.innowise.second.simple.entity.dto;
+package by.innowise.second.simple.controller.dto;
 
 import by.innowise.second.simple.entity.Status;
 import lombok.Getter;

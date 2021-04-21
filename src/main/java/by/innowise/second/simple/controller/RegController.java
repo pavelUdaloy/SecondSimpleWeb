@@ -1,6 +1,6 @@
 package by.innowise.second.simple.controller;
 
-import by.innowise.second.simple.entity.dto.RegDto;
+import by.innowise.second.simple.controller.dto.RegDto;
 import by.innowise.second.simple.service.RegService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

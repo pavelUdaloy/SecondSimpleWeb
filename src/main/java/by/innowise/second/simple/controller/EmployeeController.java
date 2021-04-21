@@ -1,6 +1,6 @@
 package by.innowise.second.simple.controller;
 
-import by.innowise.second.simple.entity.dto.EmployeeDto;
+import by.innowise.second.simple.controller.dto.EmployeeDto;
 import by.innowise.second.simple.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/employee")
+@RequestMapping(path = "/employees")
 @AllArgsConstructor
 public class EmployeeController {
 
