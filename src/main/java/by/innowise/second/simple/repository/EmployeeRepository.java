@@ -20,5 +20,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @EntityGraph(value = "Employee.roles")
     List<Employee> findAllBy();
 
+    @EntityGraph(value = "Employee.roles")
     Employee findByUsername(@Param("username") String username);
 }
