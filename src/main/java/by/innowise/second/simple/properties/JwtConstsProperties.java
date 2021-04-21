@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.Duration;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ public class JwtConstsProperties {
     @NotBlank
     private String secret;
     @NotNull
-    private Integer accessExpirationDateInMs;
+    private Duration accessExpirationDateInMs;
     @NotNull
-    private Integer refreshExpirationDateInMs;
+    private Duration refreshExpirationDateInMs;
 }

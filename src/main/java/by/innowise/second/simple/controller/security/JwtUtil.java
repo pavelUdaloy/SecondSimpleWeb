@@ -6,14 +6,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
     private final String secret;
-    private final Integer jwtExpirationInMs;
-    private final Integer refreshExpirationDateInMs;
+    private final Duration jwtExpirationInMs;
+    private final Duration refreshExpirationDateInMs;
 
     public JwtUtil(JwtConstsProperties jwtConstsProperties) {
         secret = jwtConstsProperties.getSecret();
@@ -23,13 +24,13 @@ public class JwtUtil {
 
     public String generateAccessToken(String username) {
         return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs.toMillis()))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public String generateRefreshToken(String username) {
         return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
+                .setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs.toMillis()))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
