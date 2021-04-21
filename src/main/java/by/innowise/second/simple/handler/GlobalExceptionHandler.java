@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({AuthenticationException.class, MissingCsrfTokenException.class, InvalidCsrfTokenException.class, SessionAuthenticationException.class, Exception.class})
+    @ExceptionHandler({Exception.class})
     public ErrorInfo handleAuthenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "error.authorization");
