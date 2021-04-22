@@ -12,6 +12,9 @@ repositories {
 }
 
 dependencies {
+    compile "org.springframework.boot:spring-boot-starter-validation"
+    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '7.0.1.Final'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
@@ -24,9 +27,6 @@ dependencies {
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-//    implementation group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.4.4'
-
-    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '7.0.1.Final'
 
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.3.3'

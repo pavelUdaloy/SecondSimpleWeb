@@ -4,23 +4,26 @@ import by.innowise.second.simple.properties.JwtConstsProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
 
+    private final static String ROLES = "roles";
+
     private final String secret;
-<<<<<<< HEAD:src/main/java/by/innowise/second/simple/controller/security/JwtUtil.java
-    private final Duration jwtExpirationInMs;
-    private final Duration refreshExpirationDateInMs;
-=======
     private final Duration jwtExpiration;
     private final Duration refreshExpiration;
     private final String signatureAlgorithm;
->>>>>>> fix:src/main/java/by/innowise/second/simple/security/JwtUtil.java
 
     public JwtUtil(JwtConstsProperties jwtConstsProperties) {
         secret = jwtConstsProperties.getSecret();
@@ -29,23 +32,15 @@ public class JwtUtil {
         signatureAlgorithm = jwtConstsProperties.getSignatureAlgorithm();
     }
 
-    public String generateAccessToken(String username) {
-<<<<<<< HEAD:src/main/java/by/innowise/second/simple/controller/security/JwtUtil.java
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs.toMillis()))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
-    }
-
-    public String generateRefreshToken(String username) {
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs.toMillis()))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
-=======
+    public String generateAccessToken(String username, List<String> roles) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(ROLES, roles);
         return Jwts.builder()
+                .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration.toMillis()))
-                .signWith(SignatureAlgorithm.forName(signatureAlgorithm), secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public String generateRefreshToken(String username) {
@@ -54,7 +49,6 @@ public class JwtUtil {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration.toMillis()))
                 .signWith(SignatureAlgorithm.forName(signatureAlgorithm), secret).compact();
->>>>>>> fix:src/main/java/by/innowise/second/simple/security/JwtUtil.java
     }
 
     public boolean validateToken(String authToken) {
@@ -65,5 +59,16 @@ public class JwtUtil {
     public String getUsernameFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         return claims.getSubject();
+    }
+
+    public List<SimpleGrantedAuthority> getRolesFromToken(String token) {
+        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        List<SimpleGrantedAuthority> roles = new ArrayList<>();
+        List<String> rolesBody = (List<String>) claims.get(ROLES);
+        if (rolesBody != null && rolesBody.size() != 0) {
+            roles = rolesBody.stream().map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+        }
+        return roles;
     }
 }

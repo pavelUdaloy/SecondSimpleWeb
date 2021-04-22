@@ -16,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashSet;
 
 @Component
 @AllArgsConstructor
@@ -35,7 +34,7 @@ public class CustomJwtFilter extends OncePerRequestFilter {
             return;
         }
         UserDetails userDetails = new User(jwtTokenUtil.getUsernameFromToken(jwtToken),
-                "", new HashSet<>());
+                "", jwtTokenUtil.getRolesFromToken(jwtToken));
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.getAuthorities());
         authenticationManager.authenticate(authentication);
